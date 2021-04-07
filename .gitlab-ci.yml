@@ -1,0 +1,33 @@
+
+stages:
+  - build
+  - test
+
+switch:
+  stage: build
+  script:
+    - echo "Hi"
+    - echo "REF name ${CI_COMMIT_REF_NAME}"
+    - "curl -X POST -F token=${CI_JOB_TOKEN} -F ref=${CI_COMMIT_REF_NAME} https://gitlab.com/api/v4/projects/25702964/trigger/pipeline"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE != "pipeline"'
+
+test:
+  stage: test
+  script:
+    - echo "test"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE != "pipeline"'
+test_2:
+  stage: test
+  script:
+    - echo "fail 122"
+    - exit 122
+  allow_failure:
+    exit_codes: 122
+test_t:
+  stage: test
+  script:
+    - echo "test error"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "pipeline"'
