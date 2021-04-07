@@ -23,6 +23,7 @@ test:
 test_t:
   stage: test
   script:
-    - echo "test"
+    - echo "test error"
+    - exit 1
   rules:
     - if: '$CI_PIPELINE_SOURCE == "pipeline"'
