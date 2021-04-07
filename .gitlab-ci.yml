@@ -8,7 +8,7 @@ switch:
   script:
     - echo "Hi"
     - echo "REF name ${CI_COMMIT_REF_NAME}"
-    - "curl -X POST -F token=${TRIGGER_TOKEN} -F ref=${CI_COMMIT_REF_NAME} https://gitlab.com/api/v4/projects/25702964/trigger/pipeline"
+    - "curl -X POST -F token=${CI_JOB_TOKEN} -F ref=${CI_COMMIT_REF_NAME} https://gitlab.com/api/v4/projects/25702964/trigger/pipeline"
   rules:
     - if: '$CI_PIPELINE_SOURCE != "trigger"'
 
