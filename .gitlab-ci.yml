@@ -10,7 +10,7 @@ switch:
     - echo "REF name ${CI_COMMIT_REF_NAME}"
     - "curl -X POST -F token=${CI_JOB_TOKEN} -F ref=${CI_COMMIT_REF_NAME} https://gitlab.com/api/v4/projects/25702964/trigger/pipeline"
   rules:
-    - if: '$CI_PIPELINE_SOURCE != "trigger"'
+    - if: '$CI_PIPELINE_SOURCE != "pipeline"'
 
 test:
   stage: test
@@ -18,11 +18,11 @@ test:
     - sleep 60
     - echo "test"
   rules:
-    - if: '$CI_PIPELINE_SOURCE != "trigger"'
+    - if: '$CI_PIPELINE_SOURCE != "pipeline"'
 
 test_t:
   stage: test
   script:
     - echo "test"
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "trigger"'
+    - if: '$CI_PIPELINE_SOURCE == "pipeline"'
