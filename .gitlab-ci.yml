@@ -15,15 +15,19 @@ switch:
 test:
   stage: test
   script:
-    - sleep 60
     - echo "test"
   rules:
     - if: '$CI_PIPELINE_SOURCE != "pipeline"'
-
+test_2:
+  stage: test
+  script:
+    - echo "fail 122"
+    - exit 122
+  allow_failure:
+    exit_codes: 122
 test_t:
   stage: test
   script:
     - echo "test error"
-    - exit 1
   rules:
     - if: '$CI_PIPELINE_SOURCE == "pipeline"'
