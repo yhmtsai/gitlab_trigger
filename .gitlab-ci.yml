@@ -32,18 +32,16 @@ test_2:
     variables:
       - $STATUS_CONTEXT == "quick"
 
-test_22:
+test_full:
   stage: test
   script:
     - echo "fail 122"
     - exit 122
   allow_failure:
     exit_codes: 122
-  variables:
-    STATUS_CONTEXT: "quick"
   only:
     variables:
-      - $STATUS_CONTEXT == "" || $STATUS_CONTEXT == "quick"
+      - $STATUS_CONTEXT == "full"
 
 test_t:
   stage: test
